@@ -1,48 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card-exclusive animate-view">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="custom-card animate-view">
+    <div class="d-flex justify-content-between align-items-center mb-5">
         <div>
-            <h3 class="fw-bold m-0" style="color: var(--deep-slate)">Daftar Antrean Unit</h3>
-            <p class="text-muted small mb-0">Monitoring status perbaikan kendaraan pelanggan</p>
+            <h2 class="fw-800 mb-1" style="letter-spacing: -1px;">Daftar Antrean Service</h2>
+            <p class="text-muted small">Monitoring status perbaikan kendaraan secara real-time.</p>
         </div>
-        <a href="#" class="btn-premium">
-            <i class="fa-solid fa-plus-circle"></i> Tambah Antrean
+        <a href="#" class="btn-emerald text-decoration-none">
+            <i class="fa-solid fa-plus-circle me-2"></i>Tambah Kendaraan
         </a>
     </div>
 
     <div class="table-responsive">
-        <table class="table table-hover align-middle">
-            <thead class="bg-light">
-                <tr class="text-muted small">
-                    <th class="py-3 ps-4">PLAT NOMOR</th>
-                    <th class="py-3">PEMILIK</th>
-                    <th class="py-3">MERK UNIT</th>
-                    <th class="py-3">KELUHAN</th>
-                    <th class="py-3 pe-4 text-center">OPSI</th>
+        <table class="table table-borderless align-middle">
+            <thead>
+                <tr class="text-muted small border-bottom">
+                    <th class="pb-3 ps-0">PLAT NOMOR</th>
+                    <th class="pb-3">NAMA PEMILIK</th>
+                    <th class="pb-3">MERK UNIT</th>
+                    <th class="pb-3">KELUHAN</th>
+                    <th class="pb-3 text-center">AKSI</th>
                 </tr>
             </thead>
-            <tbody>
-                {{-- Data akan muncul otomatis di Nomor 4 --}}
-                @forelse($kendaraans ?? [] as $k)
-                <tr>
-                    <td class="ps-4"><span class="badge bg-dark font-monospace p-2">{{ $k->plat_nomor }}</span></td>
-                    <td class="fw-semibold">{{ $k->nama_pemilik }}</td>
-                    <td>{{ $k->merk_kendaraan }}</td>
-                    <td class="text-muted">{{ $k->keluhan }}</td>
-                    <td class="pe-4 text-center">
-                        <div class="btn-group">
-                            <button class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-pen"></i></button>
-                            <button class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+            <tbody class="border-top">
+                @forelse($kendaraans as $item)
+                <tr class="border-bottom">
+                    <td class="py-4 ps-0">
+                        <span class="badge-plat">{{ $item->plat_nomor }}</span>
+                    </td>
+                    <td class="fw-bold text-dark">{{ $item->nama_pemilik }}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-motorcycle me-2 text-muted"></i>
+                            {{ $item->merk_kendaraan }}
                         </div>
+                    </td>
+                    <td class="text-muted small">{{ Str::limit($item->keluhan, 40) }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-light p-2 rounded-3 text-emerald shadow-sm">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center py-5 text-muted small">
-                        <i class="fa-solid fa-triangle-exclamation d-block mb-2 fs-3"></i>
-                        Belum ada data kendaraan yang terdaftar dalam sistem.
+                    <td colspan="5" class="text-center py-5">
+                        <div class="py-4">
+                            <i class="fa-solid fa-folder-open fa-3x mb-3" style="color: #e2e8f0"></i>
+                            <p class="text-muted fw-500">Belum ada antrean kendaraan saat ini.</p>
+                        </div>
                     </td>
                 </tr>
                 @endforelse
