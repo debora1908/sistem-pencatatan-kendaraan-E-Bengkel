@@ -7,9 +7,9 @@
             <h2 class="fw-800 mb-1" style="letter-spacing: -1px;">Daftar Antrean Service</h2>
             <p class="text-muted small">Monitoring status perbaikan kendaraan secara real-time.</p>
         </div>
-        <a href="#" class="btn-emerald text-decoration-none">
-            <i class="fa-solid fa-plus-circle me-2"></i>Tambah Kendaraan
-        </a>
+        <a href="{{ route('kendaraan.create') }}" class="btn-emerald text-decoration-none">
+    <i class="fa-solid fa-plus-circle me-2"></i>Tambah Kendaraan
+</a>    
     </div>
 
     <div class="table-responsive">
